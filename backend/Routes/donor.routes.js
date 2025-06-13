@@ -1,9 +1,13 @@
 import express from "express";
 import requireAuth from "../Middlewares/requireAuth.middleware.js";
-import { registerFood } from "../Controllers/donor.controller.js";
+import {
+  donatedFoodList,
+  registerFood,
+} from "../Controllers/donor.controller.js";
 
 const donorRouter = express.Router();
 
 donorRouter.post("/register", requireAuth(["donor"]), registerFood);
+donorRouter.get("/donations", requireAuth(["donor"]), donatedFoodList);
 
 export default donorRouter;
