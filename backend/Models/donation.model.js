@@ -21,8 +21,8 @@ const DonationSchema = new mongoose.Schema(
     },
     location: {
       address: String,
-      lat: String,
-      lng: String,
+      latitude: String,
+      longitude: String,
       required: true,
     },
   },

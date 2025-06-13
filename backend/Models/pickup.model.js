@@ -24,3 +24,6 @@ const PickupSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+const PickupModel = mongoose.model("Pickup", PickupSchema);
+export default PickupModel;
