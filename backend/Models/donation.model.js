@@ -16,15 +16,25 @@ const DonationSchema = new mongoose.Schema(
       required: true,
     },
     expiryDate: {
-      type: Date,
+      type: String,
       required: true,
     },
     location: {
-      address: String,
-      latitude: String,
-      longitude: String,
+      type: Object,
       required: true,
     },
+    address : {
+      type: String,
+      required: true
+    },
+    latitude : {
+      type: String,
+      required: true
+    },
+    longitude : {
+      type: String,
+      required: true
+    }
   },
   { timestamps: true }
 );
