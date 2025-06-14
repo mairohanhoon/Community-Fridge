@@ -23,17 +23,21 @@ const DonationSchema = new mongoose.Schema(
       type: Object,
       required: true,
     },
-    address : {
+    address: {
       type: String,
-      required: true
+      required: true,
     },
-    latitude : {
+    latitude: {
       type: String,
-      required: true
+      required: true,
     },
-    longitude : {
+    longitude: {
       type: String,
-      required: true
+      required: true,
+    },
+    isPickedUp: {
+      type: Boolean,
+      default: false,
     }
   },
   { timestamps: true }

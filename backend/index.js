@@ -6,8 +6,8 @@ import cookieParser from "cookie-parser";
 
 // Routes
 import authRouter from "./Routes/auth.routes.js";
-import homeRouter from "./Routes/home.routes.js";
 import donorRouter from "./Routes/donor.routes.js";
+import pickupRouter from "./Routes/pickup.routes.js";
 
 dotenv.config();
 
@@ -19,8 +19,8 @@ app.use(express.json());
 app.use(cors());
 app.use(cookieParser());
 app.use("/api/auth", authRouter);
-app.use("/api/home", homeRouter);
 app.use("/api/donor", donorRouter);
+app.use("/api/pickups", pickupRouter);
 
 mongoose
   .connect(`${process.env.MONGO_URL}`)

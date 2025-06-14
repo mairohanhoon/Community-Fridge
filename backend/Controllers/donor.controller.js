@@ -44,17 +44,25 @@ const donatedFoodList = async (req, res) => {
     const token = req.cookies.token;
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
     const donatedList = await DonationModel.find({ donor: decodedToken._id });
-    return res
-      .status(200)
-      .json({
-        message: "Successfully fetched all the donations",
-        donatedList,
-        success: true,
-      });
+    return res.status(200).json({
+      message: "Successfully fetched all the donations",
+      donatedList,
+      success: true,
+    });
   } catch (error) {
     return res
       .status(500)
       .json({ message: "Donation food List Failed", success: false });
+  }
+};
+
+const allDonatedFood = async (req, res) => {
+  try {
+    
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "All Donation food List Failed", success: false });
   }
 };
 
