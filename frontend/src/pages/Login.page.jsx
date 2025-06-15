@@ -1,63 +1,68 @@
-import React, {useState, useEffect} from 'react';
-import {useNavigate} from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import { handleError, handleSuccess } from "../utils.js";
 
 const LoginPage = () => {
-
-    const navigate = useNavigate();
-    
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-
-
-    const handleSubmit = async (e) => {
-        console.log('Signed in successfully');
+  const navigate = useNavigate();
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const handleLogin = async (e) => {
+      e.preventDefault();
+      if (!email || !password) {
+        return handleError("All feilds are required");
+      }
+      try {
         
-    }
+      } catch (error) {
+        console.log("Frontend Login Error : ", error);
+      }
+      console.log("Login");
+    };
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4 sm:px-6">
+      <div className="w-full max-w-md bg-white p-6 sm:p-8 rounded-2xl shadow-md">
+        <h2 className="text-xl sm:text-2xl font-bold text-center mb-6 text-gray-800">
+          LogIn
+        </h2>
 
-    return (
-        <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 h-screen items-center">
-            <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-                <img className="mx-auto h-20 w-auto rounded-xl" src="/src/assets/bookify-cropped.png" alt="Your Company"/>
-                <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">Login in Community Fridge</h2>
-            </div>
+        <form onSubmit={(e)=> handleLogin()} className="space-y-4">
+          <input
+            type="email"
+            placeholder="Email"
+            className="w-full px-4 py-3 text-sm sm:text-base border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            className="w-full px-4 py-3 text-sm sm:text-base border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          
+          <button
+            type="button"
+            className="w-full bg-blue-500 text-white py-3 text-sm sm:text-base rounded-lg hover:bg-blue-600 transition"
+            onClick={(e) => handleLogin(e)}
+            
+          >
+            LogIn
+          </button>
+          <button
+            type="button"
+            className="w-full bg-green-500 text-white py-3 text-sm sm:text-base rounded-lg hover:bg-green-600 transition"
+            onClick={(e) => navigate('/signup')}
+          >
+            Sign Up
+          </button>
+        </form>
 
-            <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                <form className="space-y-6" action="#" method="POST">
-                <div>
-                    <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">Email address</label>
-                    <div className="mt-2">
-                    <input
-                        onChange={(e) => setEmail(e.target.value)}
-                        value={email} 
-                        type="email" name="email" id="email" autoComplete="email" required className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"/>
-                    </div>
-                </div>
-
-                <div>
-                    <div className="flex items-center justify-between">
-                    <label htmlFor="password" className="block text-sm/6 font-medium text-gray-900">Password</label>
-                    </div>
-                    <div className="mt-2">
-                    <input
-                        onChange={(e) => setPassword(e.target.value)} 
-                        value={password}
-                        type="password" name="password" id="password" autoComplete="current-password" required className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"/>
-                    </div>
-                </div>
-
-                <div>
-                    <button
-                        type="submit" className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">LogIn</button>
-                </div>
-                <div>
-                    <button
-                        onClick={() => navigate('/register')}
-                        type="submit" className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign Up</button>
-                </div>
-                </form>
-            </div>
-        </div>
-    )
-}
+      </div>
+      <ToastContainer/>
+    </div>
+  );
+};
 
 export default LoginPage;
