@@ -6,11 +6,12 @@ export const useUserContext = () => {
   return useContext(userContext);
 };
 
-export const userProvider = (props) => {
+export const UserProvider = (props) => {
   const [userID, setUserID] = useState(null);
   const [role, setRole] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   return (
-    <userContext.Provider value={{}}>{props.children}</userContext.Provider>
+    <userContext.Provider value={{userID, setUserID, role, setRole, loading, setLoading}}>{props.children}</userContext.Provider>
   );
 };

@@ -70,4 +70,39 @@ const loginController = async (req, res) => {
   }
 };
 
-export { signUpController, loginController };
+const isLoggedInController = async (req, res) => {
+  try {
+    const jwtT = req.cookies?.token;
+    if (!jwtT) {
+      return res
+        .status(402)
+        .json({ message: "TOKEN NOT AVAILABLE", success: false });
+    }
+    const decoded = jwt.verify(jwtT, process.env.JWT_SECRET);
+    return res.status(200).json({
+      message: "Token fetched successfully",
+      success: true,
+      decoded,
+    });
+  } catch (error) {
+    return res.status(500).json({ message: error.message, success: false });
+  }
+};
+
+const logOutController = async (req, res) => {
+  try {
+    res.clearCookie("token");
+    res
+      .status(200)
+      .json({ message: "Logged Out Clear Cookies", success: true });
+  } catch (error) {
+    return res.status(500).json({ message: error.message, success: false });
+  }
+};
+
+export {
+  signUpController,
+  loginController,
+  isLoggedInController,
+  logOutController,
+};
