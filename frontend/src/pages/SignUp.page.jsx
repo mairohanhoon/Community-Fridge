@@ -15,13 +15,34 @@ const SignUpPage = () => {
       return handleError("All feilds are required");
     }
     try {
+      const url = "http://localhost:8080/api/auth/signup";
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: fullName,
+          password,
+          email,
+          role,
+        }),
+      });
+      const result = await response.json();
+      if (result.success) {
+        handleSuccess(result.message);
+        setTimeout(() => {
+          navigate("/login");
+        }, 750);
+      } else {
+        handleError(result.message);
+      }
     } catch (error) {
       console.log("Frontend SignUp Error : ", error);
     }
     console.log("SignUp");
   };
-  console.log(fullName, password, email, role);
-  
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4 sm:px-6">
       <div className="w-full max-w-md bg-white p-6 sm:p-8 rounded-2xl shadow-md">

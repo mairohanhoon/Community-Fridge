@@ -8,17 +8,39 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const handleLogin = async (e) => {
-      e.preventDefault();
-      if (!email || !password) {
-        return handleError("All feilds are required");
+    e.preventDefault();
+    if (!email || !password) {
+      return handleError("All feilds are required");
+    }
+    try {
+      const url = "http://localhost:8080/api/auth/login";
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          password,
+          email,
+        }),
+      });
+      const result = await response.json();
+      console.log(result);
+      
+      if (result.success) {
+        handleSuccess(result.message);
+        setTimeout(() => {
+          navigate("/home");
+        }, 750);
+      } else {
+        handleError(result.message);
       }
-      try {
-        
-      } catch (error) {
-        console.log("Frontend Login Error : ", error);
-      }
-      console.log("Login");
-    };
+    } catch (error) {
+      console.log("Frontend Login Error : ", error);
+    }
+    console.log("Login");
+  };
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4 sm:px-6">
       <div className="w-full max-w-md bg-white p-6 sm:p-8 rounded-2xl shadow-md">
@@ -26,7 +48,7 @@ const LoginPage = () => {
           LogIn
         </h2>
 
-        <form onSubmit={(e)=> handleLogin()} className="space-y-4">
+        <form onSubmit={(e) => handleLogin()} className="space-y-4">
           <input
             type="email"
             placeholder="Email"
@@ -41,26 +63,24 @@ const LoginPage = () => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          
+
           <button
             type="button"
             className="w-full bg-blue-500 text-white py-3 text-sm sm:text-base rounded-lg hover:bg-blue-600 transition"
             onClick={(e) => handleLogin(e)}
-            
           >
             LogIn
           </button>
           <button
             type="button"
             className="w-full bg-green-500 text-white py-3 text-sm sm:text-base rounded-lg hover:bg-green-600 transition"
-            onClick={(e) => navigate('/signup')}
+            onClick={(e) => navigate("/signup")}
           >
             Sign Up
           </button>
         </form>
-
       </div>
-      <ToastContainer/>
+      <ToastContainer />
     </div>
   );
 };

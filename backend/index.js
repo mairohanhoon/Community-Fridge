@@ -16,7 +16,12 @@ const PORT = process.env.PORT || 8080;
 
 app.use(express.json());
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:5173", // your React's origin
+    credentials: true,
+  })
+);
 app.use(cookieParser());
 app.use("/api/auth", authRouter);
 app.use("/api/donor", donorRouter);
