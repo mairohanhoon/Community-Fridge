@@ -64,6 +64,8 @@ const loginController = async (req, res) => {
       jwtToken,
       email,
       name: user.name,
+      role: user.role,
+      _id: user._id,
     });
   } catch (error) {
     return res.status(500).json({ message: error.message, success: false });

@@ -7,8 +7,8 @@ export const useUserContext = () => {
 };
 
 export const UserProvider = (props) => {
-  const [userID, setUserID] = useState(null);
-  const [role, setRole] = useState(null);
+  const [userID, setUserID] = useState("");
+  const [role, setRole] = useState("");
   const [loading, setLoading] = useState(true);
 
   return (

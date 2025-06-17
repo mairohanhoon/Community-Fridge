@@ -7,6 +7,7 @@ import { useUserContext } from "./context/user.context.jsx";
 import LoadingPage from "./pages/Loading.page.jsx";
 import { Navigate } from "react-router-dom";
 import { User } from "lucide-react";
+import DonationsPage from "./pages/Donation.page.jsx";
 function App() {
   const UserContext = useUserContext();
   const navigate = useNavigate();
@@ -39,13 +40,13 @@ function App() {
       }
     }
     checkLoginStatus();
-  }, []);
+  }, [UserContext.role, UserContext._id]);
   console.log(UserContext.userID + " " + UserContext.role);
   if (UserContext.loading) {
     return <LoadingPage />;
   }
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col bg-[#1a1a1a]">
       <Routes>
         <Route
           path="/home"
@@ -63,6 +64,16 @@ function App() {
           path="/signup"
           element={
             UserContext.userID ? <Navigate to="/home" /> : <SignUpPage />
+          }
+        />
+        <Route
+          path="/donation"
+          element={
+            UserContext.role === "donor" ? (
+              <DonationsPage />
+            ) : (
+              <Navigate to="/home" />
+            )
           }
         />
       </Routes>

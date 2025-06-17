@@ -1,15 +1,53 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { handleError, handleSuccess } from "@/utils";
+import { useUserContext } from "@/context/user.context";
 
 const MyNavbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const UserContext = useUserContext();
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const handleLogOut = async (e) => {
+    e?.preventDefault();
+
+    try {
+      const url = "http://localhost:8080/api/auth/logout";
+      const response = await fetch(url, {
+        method: "POST",
+        credentials: "include", // Send cookies
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        handleSuccess(result.message);
+        UserContext.role = "";
+        UserContext.userID = "";
+        setTimeout(() => {
+          navigate("/login");
+        }, 750);
+      } else {
+        handleError(result.message);
+      }
+    } catch (error) {
+      console.error("Logout Error :", error);
+      handleError("An error occurred while logging out.");
+    }
+  };
   return (
-    <div className="bg-[#1a1a1a] fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600 " style={{ fontFamily: '"Public Sans", "Noto Sans", sans-serif' }}>
+    <div
+      className="bg-[#1a1a1a] fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600 "
+      style={{ fontFamily: '"Public Sans", "Noto Sans", sans-serif' }}
+    >
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a href="/home" className="flex items-center space-x-3 rtl:space-x-reverse">
+        <a
+          href="/home"
+          className="flex items-center space-x-3 rtl:space-x-reverse"
+        >
           <img
             src="https://raw.githubusercontent.com/mairohanhoon/Community-Fridge/refs/heads/main/frontend/src/assets/remove.photos-removed-background-cropped.png"
             className="h-8"
@@ -23,6 +61,7 @@ const MyNavbar = () => {
           <button
             type="button"
             className=" font-bold text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            onClick={(e) => handleLogOut(e)}
           >
             LogOut
           </button>
