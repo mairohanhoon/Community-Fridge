@@ -8,6 +8,7 @@ import LoadingPage from "./pages/Loading.page.jsx";
 import { Navigate } from "react-router-dom";
 import { User } from "lucide-react";
 import DonationsPage from "./pages/Donation.page.jsx";
+import MyDonationPage from "./pages/MyDonation.page.jsx";
 function App() {
   const UserContext = useUserContext();
   const navigate = useNavigate();
@@ -71,6 +72,16 @@ function App() {
           element={
             UserContext.role === "donor" ? (
               <DonationsPage />
+            ) : (
+              <Navigate to="/home" />
+            )
+          }
+        />
+        <Route
+          path="/my-donations"
+          element={
+            UserContext.role === "donor" ? (
+              <MyDonationPage />
             ) : (
               <Navigate to="/home" />
             )

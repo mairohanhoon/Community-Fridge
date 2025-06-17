@@ -5,7 +5,7 @@ const registerFood = async (req, res) => {
   try {
     const token = req.cookies.token;
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
-    const { foodName, quantity, expiryDate, address, latitude, longitude } =
+    const { foodName, quantity, expiryDate, address, latitude, longitude, foodDescription } =
       req.body;
     const location = {
       address,
@@ -18,6 +18,7 @@ const registerFood = async (req, res) => {
       foodName,
       quantity,
       expiryDate,
+      foodDescription,
       location,
       address,
       latitude,

@@ -1,21 +1,73 @@
 import MyNavbar from "@/components/Navbar";
+import { handleError, handleSuccess } from "../utils.js";
 import React, { useState } from "react";
+import { ToastContainer } from "react-toastify";
 
 const DonationsPage = () => {
+  const [foodName, setFoodName] = useState("");
+  const [foodDescription, setFoodDescription] = useState("");
+  const [quantity, setQuantity] = useState("");
+  const [expiryDate, setExpiryDate] = useState("");
+  const [address, setAddress] = useState("");
+  const [latitude, setLatitude] = useState("");
+  const [longitude, setLongitude] = useState("");
 
-  const [foodName, setFoodName] = useState(null);
-  const [foodDescription, setFoodDescription] = useState(null);
-  const [quantity, setQuantity] = useState(null);
-  const [expiryDate, setExpiryDate] = useState(null);
-  const [address, setAddress] = useState(null);
-  const [latitude, setLatitude] = useState(null);
-  const [longitude, Longitude] = useState(null);
+  const handleSubmitDonation = async (e) => {
+    e.preventDefault();
+    console.log("Toooooo");
 
-
+    if (
+      !foodName ||
+      !foodDescription ||
+      !quantity ||
+      !expiryDate ||
+      !address ||
+      !latitude ||
+      !longitude
+    ) {
+      console.log("Tooo");
+      return handleError("All feilds are required");
+    }
+    try {
+      const url = "http://localhost:8080/api/donor/register";
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          foodName,
+          foodDescription,
+          quantity,
+          expiryDate,
+          address,
+          latitude,
+          longitude,
+        }),
+      });
+      const result = await response.json();
+      console.log(result);
+      if (result.success) {
+        handleSuccess("Donation Registered Successfully");
+        foodName = "";
+        foodDescription = "";
+        quantity = "";
+        expiryDate = "";
+        address = "";
+        latitude = "";
+        longitude = "";
+      } else {
+        handleError(result.message);
+      }
+    } catch (error) {
+      console.log("Donation Page Error " + error);
+    }
+  };
 
   return (
     <div className="mt-12 relative flex size-full min-h-screen flex-col bg-[#1a1a1a] dark group/design-root overflow-x-hidden">
-      <MyNavbar/>
+      <MyNavbar />
       <div className="layout-container flex h-full grow flex-col">
         <div className="flex flex-1 justify-center py-5 px-4 sm:px-10 md:px-20 lg:px-40">
           {" "}
@@ -48,6 +100,7 @@ const DonationsPage = () => {
             <h2 className="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">
               Meal Donation Form
             </h2>
+
             {/* Input field for Food Name */}
             <div className="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
               <label className="flex flex-col min-w-40 flex-1">
@@ -62,6 +115,7 @@ const DonationsPage = () => {
                 />
               </label>
             </div>
+
             {/* Input field for Food Description */}
             <div className="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
               <label className="flex flex-col min-w-40 flex-1">
@@ -75,51 +129,90 @@ const DonationsPage = () => {
                   value={foodDescription}
                 />
               </label>
-            </div> 
-            {/* Input field for Contact Information */}
-            <div className="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
-              <label className="flex flex-col min-w-40 flex-1">
-                <p className="text-white text-base font-medium leading-normal pb-2">
-                  Contact Information
-                </p>
-                <input
-                  placeholder="Email or Phone Number"
-                  className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-white focus:outline-0 focus:ring-0 border-none bg-[#363636] focus:border-none h-14 placeholder:text-[#adadad] p-4 text-base font-normal leading-normal"
-                  value="asd"
-                />
-              </label>
             </div>
+
             {/* Input field for Quantity */}
             <div className="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
               <label className="flex flex-col min-w-40 flex-1">
                 <p className="text-white text-base font-medium leading-normal pb-2">
-                  Quantity
+                  Food Quantity
                 </p>
                 <input
-                  placeholder="Number of servings"
+                  onChange={(e) => setQuantity(e.target.value)}
+                  placeholder="Enter Food Quantity"
                   className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-white focus:outline-0 focus:ring-0 border-none bg-[#363636] focus:border-none h-14 placeholder:text-[#adadad] p-4 text-base font-normal leading-normal"
-                  value=""
-                  type="number" // Added type number for quantity
+                  value={quantity}
                 />
               </label>
             </div>
-            {/* Input field for Pick-up Time */}
+
+            {/* Input field for Expiry Date */}
             <div className="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
               <label className="flex flex-col min-w-40 flex-1">
                 <p className="text-white text-base font-medium leading-normal pb-2">
-                  Pick-up Time
+                  Expiry Date
                 </p>
                 <input
-                  placeholder="Preferred pick-up time"
+                  placeholder="Enter Expiry Date"
                   className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-white focus:outline-0 focus:ring-0 border-none bg-[#363636] focus:border-none h-14 placeholder:text-[#adadad] p-4 text-base font-normal leading-normal"
-                  value=""
+                  value={expiryDate}
+                  onChange={(e) => setExpiryDate(e.target.value)}
                   type="datetime-local" // Changed to datetime-local for better time input
                 />
               </label>
             </div>
+
+            {/* Input field for Address */}
+            <div className="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+              <label className="flex flex-col min-w-40 flex-1">
+                <p className="text-white text-base font-medium leading-normal pb-2">
+                  Pickup Address
+                </p>
+                <input
+                  onChange={(e) => setAddress(e.target.value)}
+                  placeholder="Enter Pickup Address"
+                  className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-white focus:outline-0 focus:ring-0 border-none bg-[#363636] focus:border-none h-14 placeholder:text-[#adadad] p-4 text-base font-normal leading-normal"
+                  value={address}
+                />
+              </label>
+            </div>
+
+            {/* Input field for Latitude */}
+            <div className="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+              <label className="flex flex-col min-w-40 flex-1">
+                <p className="text-white text-base font-medium leading-normal pb-2">
+                  Address Latitude
+                </p>
+                <input
+                  onChange={(e) => setLatitude(e.target.value)}
+                  placeholder="Enter Address Latitude"
+                  className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-white focus:outline-0 focus:ring-0 border-none bg-[#363636] focus:border-none h-14 placeholder:text-[#adadad] p-4 text-base font-normal leading-normal"
+                  value={latitude}
+                />
+              </label>
+            </div>
+
+            {/* Input field for Longitude */}
+            <div className="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+              <label className="flex flex-col min-w-40 flex-1">
+                <p className="text-white text-base font-medium leading-normal pb-2">
+                  Address Longitude
+                </p>
+                <input
+                  onChange={(e) => setLongitude(e.target.value)}
+                  placeholder="Enter Address Longitude"
+                  className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-white focus:outline-0 focus:ring-0 border-none bg-[#363636] focus:border-none h-14 placeholder:text-[#adadad] p-4 text-base font-normal leading-normal"
+                  value={longitude}
+                />
+              </label>
+            </div>
+
             {/* Submit Donation button */}
             <div className="flex px-4 py-3 justify-end">
-              <button className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-black text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-gray-800 transition-colors">
+              <button
+                onClick={(e) => handleSubmitDonation(e)}
+                className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-black text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-gray-800 transition-colors"
+              >
                 <span className="truncate">Submit Donation</span>
               </button>
             </div>
@@ -156,6 +249,7 @@ const DonationsPage = () => {
           </div>
         </footer>
       </div>
+      <ToastContainer />
     </div>
   );
 };

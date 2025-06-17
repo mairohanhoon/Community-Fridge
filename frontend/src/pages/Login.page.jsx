@@ -36,7 +36,7 @@ const LoginPage = () => {
         UserContext.setUserID(result.role);
         setTimeout(() => {
           navigate("/home");
-        }, 750);
+        }, 500);
       } else {
         handleError(result.message);
       }

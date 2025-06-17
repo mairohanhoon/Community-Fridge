@@ -15,8 +15,12 @@ const DonationSchema = new mongoose.Schema(
       type: String, // eg. 5kg, 10pack etc..
       required: true,
     },
-    expiryDate: {
+    foodDescription: {
       type: String,
+      required: true,
+    },
+    expiryDate: {
+      type: Date,
       required: true,
     },
     location: {
