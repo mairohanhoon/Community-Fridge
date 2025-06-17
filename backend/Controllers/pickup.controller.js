@@ -58,4 +58,17 @@ const getNgoPickups = async (req, res) => {
   }
 };
 
-export { schedulePickup, getNgoPickups };
+const getAllDonations = async (req, res) => {
+  try {
+    const allDonations = await DonationModel.find({ isPickedUp: false });
+    return res.status(200).json({
+      message: "Successfully fetched all the donations",
+      allDonations,
+      success: true,
+    });
+  } catch (error) {
+    return res.status(500).json({ message: error.message, success: false });
+  }
+};
+
+export { schedulePickup, getNgoPickups, getAllDonations };

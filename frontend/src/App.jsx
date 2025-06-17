@@ -6,9 +6,9 @@ import SignUpPage from "./pages/SignUp.page.jsx";
 import { useUserContext } from "./context/user.context.jsx";
 import LoadingPage from "./pages/Loading.page.jsx";
 import { Navigate } from "react-router-dom";
-import { User } from "lucide-react";
 import DonationsPage from "./pages/Donation.page.jsx";
 import MyDonationPage from "./pages/MyDonation.page.jsx";
+import AllDonations from "./pages/AllDonations.page.jsx";
 function App() {
   const UserContext = useUserContext();
   const navigate = useNavigate();
@@ -82,6 +82,16 @@ function App() {
           element={
             UserContext.role === "donor" ? (
               <MyDonationPage />
+            ) : (
+              <Navigate to="/home" />
+            )
+          }
+        />
+        <Route
+          path="/donations"
+          element={
+            UserContext.role === "ngo" ? (
+              <AllDonations/>
             ) : (
               <Navigate to="/home" />
             )
