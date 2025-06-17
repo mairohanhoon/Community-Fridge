@@ -262,7 +262,7 @@ const HomePage = () => {
                 </a>
               </div>
               <p className="text-[#adadad] text-base font-normal leading-normal">
-                © 2023 Community Fridge. All rights reserved.
+                © 2025 Community Fridge. All rights reserved.
               </p>
             </footer>
           </div>

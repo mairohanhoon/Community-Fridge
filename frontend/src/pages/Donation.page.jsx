@@ -1,8 +1,21 @@
-import React from "react";
+import MyNavbar from "@/components/Navbar";
+import React, { useState } from "react";
 
 const DonationsPage = () => {
+
+  const [foodName, setFoodName] = useState(null);
+  const [foodDescription, setFoodDescription] = useState(null);
+  const [quantity, setQuantity] = useState(null);
+  const [expiryDate, setExpiryDate] = useState(null);
+  const [address, setAddress] = useState(null);
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, Longitude] = useState(null);
+
+
+
   return (
-    <div className="min-h-screen bg-gray-900 font-sans text-white">
+    <div className="mt-12 relative flex size-full min-h-screen flex-col bg-[#1a1a1a] dark group/design-root overflow-x-hidden">
+      <MyNavbar/>
       <div className="layout-container flex h-full grow flex-col">
         <div className="flex flex-1 justify-center py-5 px-4 sm:px-10 md:px-20 lg:px-40">
           {" "}
@@ -35,19 +48,34 @@ const DonationsPage = () => {
             <h2 className="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">
               Meal Donation Form
             </h2>
-            {/* Input field for Your Name */}
+            {/* Input field for Food Name */}
             <div className="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
               <label className="flex flex-col min-w-40 flex-1">
                 <p className="text-white text-base font-medium leading-normal pb-2">
-                  Your Name
+                  Food Name
                 </p>
                 <input
-                  placeholder="Enter your name"
+                  onChange={(e) => setFoodName(e.target.value)}
+                  placeholder="Enter Food Name"
                   className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-white focus:outline-0 focus:ring-0 border-none bg-[#363636] focus:border-none h-14 placeholder:text-[#adadad] p-4 text-base font-normal leading-normal"
-                  value=""
+                  value={foodName}
                 />
               </label>
             </div>
+            {/* Input field for Food Description */}
+            <div className="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+              <label className="flex flex-col min-w-40 flex-1">
+                <p className="text-white text-base font-medium leading-normal pb-2">
+                  Food Description
+                </p>
+                <input
+                  onChange={(e) => setFoodDescription(e.target.value)}
+                  placeholder="Enter Food Description"
+                  className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-white focus:outline-0 focus:ring-0 border-none bg-[#363636] focus:border-none h-14 placeholder:text-[#adadad] p-4 text-base font-normal leading-normal"
+                  value={foodDescription}
+                />
+              </label>
+            </div> 
             {/* Input field for Contact Information */}
             <div className="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
               <label className="flex flex-col min-w-40 flex-1">
@@ -57,25 +85,8 @@ const DonationsPage = () => {
                 <input
                   placeholder="Email or Phone Number"
                   className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-white focus:outline-0 focus:ring-0 border-none bg-[#363636] focus:border-none h-14 placeholder:text-[#adadad] p-4 text-base font-normal leading-normal"
-                  value=""
+                  value="asd"
                 />
-              </label>
-            </div>
-            {/* Dropdown for Type of Food */}
-            <div className="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
-              <label className="flex flex-col min-w-40 flex-1">
-                <p className="text-white text-base font-medium leading-normal pb-2">
-                  Type of Food
-                </p>
-                <select className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-white focus:outline-0 focus:ring-0 border-none bg-[#363636] focus:border-none h-14 placeholder:text-[#adadad] p-4 text-base font-normal leading-normal appearance-none">
-                  {" "}
-                  {/* Added appearance-none to remove default select arrow for custom styling */}
-                  <option value="one">Select food type</option>
-                  <option value="two">Cooked Meals</option>
-                  <option value="three">Fresh Produce</option>
-                  <option value="four">Canned Goods</option>
-                  <option value="five">Baked Goods</option>
-                </select>
               </label>
             </div>
             {/* Input field for Quantity */}
@@ -134,33 +145,12 @@ const DonationsPage = () => {
             </p>
           </div>
         </div>
-        <footer className="flex justify-center bg-gray-800 py-10 mt-8">
-          {" "}
-          {/* Added background to footer */}
+        <hr />
+        <footer className="flex justify-center bg-[#1a1a1a] py-10">
           <div className="flex max-w-[960px] flex-1 flex-col">
             <footer className="flex flex-col gap-6 px-5 text-center @container">
-              <div className="flex flex-wrap items-center justify-center gap-6 @[480px]:flex-row @[480px]:justify-around">
-                <a
-                  className="text-[#adadad] text-base font-normal leading-normal min-w-40 hover:text-white transition-colors"
-                  href="#"
-                >
-                  About Us
-                </a>
-                <a
-                  className="text-[#adadad] text-base font-normal leading-normal min-w-40 hover:text-white transition-colors"
-                  href="#"
-                >
-                  Contact
-                </a>
-                <a
-                  className="text-[#adadad] text-base font-normal leading-normal min-w-40 hover:text-white transition-colors"
-                  href="#"
-                >
-                  Privacy Policy
-                </a>
-              </div>
               <p className="text-[#adadad] text-base font-normal leading-normal mt-4">
-                &copy; 2024 Community Fridge. All rights reserved.
+                &copy; 2025 Community Fridge. All rights reserved.
               </p>
             </footer>
           </div>
