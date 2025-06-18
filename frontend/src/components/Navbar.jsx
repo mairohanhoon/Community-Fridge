@@ -6,7 +6,6 @@ import Donations from "./NavComponents/Donations";
 import DonateFood from "./NavComponents/DonateFood";
 import MyPickups from "./NavComponents/MyPickups";
 import MyDonations from "./NavComponents/MyDonations";
-import { SparklesText } from "./magicui/sparkles-text";
 
 const MyNavbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -59,8 +58,8 @@ const MyNavbar = () => {
             alt="Logo"
           />
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-            <SparklesText
-            className='text-2xl'>Community Fridge</SparklesText>
+            <div
+            className='text-xl font-extrabold'>Community Fridge</div>
             
           </span>
         </a>

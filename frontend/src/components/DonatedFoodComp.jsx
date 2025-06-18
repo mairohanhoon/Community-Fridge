@@ -1,9 +1,12 @@
+import { handleSuccess } from "@/utils";
 import React, { useEffect, useState } from "react";
-
+import { useNavigate } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
 const DonatedFood = (props) => {
   const [compChanged, setCompChanged] = useState(false);
-  useEffect(() => {},[], compChanged)
+  const navigate = useNavigate();
+  useEffect(() => {}, [], compChanged);
   const handlePickup = async (e) => {
     e.preventDefault();
     const donationId = props?.value?._id;
@@ -21,8 +24,14 @@ const DonatedFood = (props) => {
       });
       const result = await response.json();
       console.log(result);
+      if (result.success) {
+        handleSuccess(result.message);
+        setTimeout(() => {
+          navigate("/my-pickups");
+        }, 750);
+      }
     } catch (error) {
-        console.log("Donated Food Pickup Error : ", error);
+      console.log("Donated Food Pickup Error : ", error);
     }
     setCompChanged(true);
   };
@@ -33,8 +42,8 @@ const DonatedFood = (props) => {
     >
       {/* Add a fixed height to the image or its container and use object-cover */}
       <img
-        className="rounded-t-lg h-48 w-full object-cover"
-        src=""
+        className="rounded-t-lg w-full object-cover"
+        src="https://raw.githubusercontent.com/mairohanhoon/Community-Fridge/refs/heads/main/frontend/src/assets/food-donations-vector.png"
         alt="Food item"
       />
       <div className="p-5">
@@ -116,6 +125,7 @@ const DonatedFood = (props) => {
           </svg>
         </button>
       </div>
+      <ToastContainer />
     </div>
   );
 };

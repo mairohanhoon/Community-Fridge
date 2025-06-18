@@ -43,31 +43,31 @@ const MyPickupsPage = () => {
         <div className="px-40 flex flex-1 justify-center py-5">
           <div className="layout-content-container flex flex-col max-w-[960px] flex-1">
             <div className="flex flex-wrap justify-center gap-3 p-4">
-              <SparklesText className="text-white text-3xl">
+              <div className="text-white text-2xl font-extrabold">
                 My Pickups
-              </SparklesText>
+              </div>
             </div>
             <div className="px-4 py-3 @container">
               <div className="flex overflow-hidden rounded-xl border border-[#4d4d4d] bg-[#1a1a1a]">
                 <table className="flex-1">
                   <thead>
                     <tr className="bg-neutral-800">
-                      <th className="table-5d9e3161-86fb-4a70-8b73-ae73572dca00-column-120 px-4 py-3 text-left text-white w-[400px] text-sm font-medium leading-normal">
+                      <th className="table-5d9e3161-86fb-4a70-8b73-ae73572dca00-column-120 px-4 py-3 text-center text-white w-[400px] text-sm font-semibold leading-normal">
                         Food Name
                       </th>
-                      <th className="table-5d9e3161-86fb-4a70-8b73-ae73572dca00-column-240 px-4 py-3 text-left text-white w-[400px] text-sm font-medium leading-normal">
+                      <th className="table-5d9e3161-86fb-4a70-8b73-ae73572dca00-column-240 px-4 py-3 text-center text-white w-[400px] text-sm font-semibold leading-normal">
                         Quantity
                       </th>
-                      <th className="table-5d9e3161-86fb-4a70-8b73-ae73572dca00-column-360 px-4 py-3 text-left text-white w-[400px] text-sm font-medium leading-normal">
+                      <th className="table-5d9e3161-86fb-4a70-8b73-ae73572dca00-column-360 px-4 py-3 text-center text-white w-[400px] text-sm font-semibold leading-normal">
                         Description
                       </th>
-                      <th className="table-5d9e3161-86fb-4a70-8b73-ae73572dca00-column-480 px-4 py-3 text-left text-white w-[400px] text-sm font-medium leading-normal">
+                      <th className="table-5d9e3161-86fb-4a70-8b73-ae73572dca00-column-480 px-4 py-3 text-center text-white w-[400px] text-sm font-semibold leading-normal">
                         Expiry Date
                       </th>
-                      <th className="table-5d9e3161-86fb-4a70-8b73-ae73572dca00-column-600 px-4 py-3 text-left text-white w-[400px] text-sm font-medium leading-normal">
+                      <th className="table-5d9e3161-86fb-4a70-8b73-ae73572dca00-column-600 px-4 py-3 text-center text-white w-[400px] text-sm font-semibold leading-normal">
                         Location
                       </th>
-                      <th className="table-5d9e3161-86fb-4a70-8b73-ae73572dca00-column-720 px-4 py-3 text-left text-white w-60 text-sm font-medium leading-normal">
+                      <th className="table-5d9e3161-86fb-4a70-8b73-ae73572dca00-column-720 px-4 py-3 text-center text-white w-60 text-sm font-semibold leading-normal">
                         Status
                       </th>
                     </tr>

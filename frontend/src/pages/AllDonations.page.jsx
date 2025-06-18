@@ -42,9 +42,9 @@ const AllDonations = () => {
       <div className="layout-container flex h-full grow flex-col">
         <div className="flex-grow mt-4">
           <div className="flex flex-wrap justify-center gap-3 p-4">
-            <SparklesText className="text-white text-3xl">
-              My Donations
-            </SparklesText>
+            <div className="text-white text-2xl font-extrabold">
+              Available Donations
+            </div>
           </div>
           <div className="flex flex-wrap justify-center gap-3 p-4">
             {donations.length > 0 ? ( // Removed the outer curly brace here
@@ -52,7 +52,11 @@ const AllDonations = () => {
                 <DonatedFood key={data.id || index} value={data} />
               ))
             ) : (
-              <p>Loading...</p>
+              <div className="flex items-center justify-center h-screen">
+                <div className="text-white text-2xl font-extrabold">
+                  <SparklesText>No Donation's Available</SparklesText>
+                </div>
+              </div>
             )}
           </div>
         </div>
