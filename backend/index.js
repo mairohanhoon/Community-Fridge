@@ -14,17 +14,17 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-
-
 const allowedOrigins = [
-  "https://community-fridge-z7xx.vercel.app",  // ✅ your frontend domain
-  "http://localhost:3000"                      // optional for local testing
+  "https://community-fridge-z7xx.vercel.app", // ✅ your frontend domain
+  "http://localhost:3000", // optional for local testing
 ];
 
-app.use(cors({
-  origin: allowedOrigins,
-  credentials: true
-}));
+app.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(cookieParser());
 app.use("/api/auth", authRouter);
@@ -42,3 +42,5 @@ mongoose
   .catch(() => {
     console.log("Database Connection failed!");
   });
+
+export default app;
