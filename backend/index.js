@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
+import serverless from "serverless-http";
 
 // Routes
 import authRouter from "./Routes/auth.routes.js";
@@ -43,4 +44,4 @@ mongoose
     console.log("Database Connection failed!");
   });
 
-export default app;
+export default serverless(app);
