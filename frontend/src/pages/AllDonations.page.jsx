@@ -1,24 +1,60 @@
 import MyNavbar from "@/components/Navbar";
 import React, { useEffect, useState } from "react";
+import LoadingPage from "./Loading.page";
+import { SparklesText } from "@/components/magicui/sparkles-text";
+import DonatedFood from "@/components/DonatedFoodComp.jsx";
 
 const AllDonations = () => {
-
-    const [donations, setDonations] = useState("");
-    useEffect(()=>{
-        const getDonations = async () => {
-            const url = ""
+  const [donations, setDonations] = useState("");
+  useEffect(
+    () => {
+      const getDonations = async () => {
+        const url = "http://localhost:8080/api/pickups/allDonations";
+        const response = await fetch(url, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+        });
+        const result = await response.json();
+        console.log(result);
+        if (result.success) {
+          setDonations(result.allDonations);
         }
-    })
+      };
+      getDonations();
+    },
+    [],
+    donations
+  );
+
+  if (!donations) {
+    return <LoadingPage />;
+  }
+
   return (
     <div
       className="mt-12 relative flex size-full min-h-screen flex-col bg-[#1a1a1a] dark overflow-x-hidden"
       style={{ fontFamily: '"Public Sans", "Noto Sans", sans-serif' }}
     >
       <MyNavbar />
-      <div className="layout-container flex h-screen grow flex-col">
+      <div className="layout-container flex h-full grow flex-col">
         <div className="flex-grow mt-4">
-          <p className="text-white p-4">Main content goes here.</p>
-          
+          <div className="flex flex-wrap justify-center gap-3 p-4">
+            <SparklesText className="text-white text-3xl">
+              My Donations
+            </SparklesText>
+          </div>
+          <div className="flex flex-wrap justify-center gap-3 p-4">
+            {donations.length > 0 ? ( // Removed the outer curly brace here
+              donations.map((data, index) => (
+                <DonatedFood key={data.id || index} value={data} />
+              ))
+            ) : (
+              <p>Loading...</p>
+            )}
+          </div>
         </div>
         <hr />
         <footer className="flex justify-center bg-[#1a1a1a] py-10">

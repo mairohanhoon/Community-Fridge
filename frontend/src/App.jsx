@@ -9,6 +9,7 @@ import { Navigate } from "react-router-dom";
 import DonationsPage from "./pages/Donation.page.jsx";
 import MyDonationPage from "./pages/MyDonation.page.jsx";
 import AllDonations from "./pages/AllDonations.page.jsx";
+import MyPickupsPage from "./pages/MyPickups.page.jsx";
 function App() {
   const UserContext = useUserContext();
   const navigate = useNavigate();
@@ -92,6 +93,16 @@ function App() {
           element={
             UserContext.role === "ngo" ? (
               <AllDonations/>
+            ) : (
+              <Navigate to="/home" />
+            )
+          }
+        />
+        <Route
+          path="/my-pickups"
+          element={
+            UserContext.role === "ngo" ? (
+              <MyPickupsPage/>
             ) : (
               <Navigate to="/home" />
             )

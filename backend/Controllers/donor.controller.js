@@ -5,8 +5,15 @@ const registerFood = async (req, res) => {
   try {
     const token = req.cookies.token;
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
-    const { foodName, quantity, expiryDate, address, latitude, longitude, foodDescription } =
-      req.body;
+    const {
+      foodName,
+      quantity,
+      expiryDate,
+      address,
+      latitude,
+      longitude,
+      foodDescription,
+    } = req.body;
     const location = {
       address,
       latitude,
@@ -57,14 +64,24 @@ const donatedFoodList = async (req, res) => {
   }
 };
 
-const allDonatedFood = async (req, res) => {
+const donatedFood = async (req, res) => {
   try {
-    
+    const { donationId } = req.body;
+    const donatedF = await DonationModel.find({ _id: donationId });
+    if (donatedF.length < 1) {
+      return res
+        .status(402)
+        .json({ message: "No Donation found of given ID", success: false });
+    }
+    return res.status(200).json({
+      message: "Successfully fetched the donation",
+      donatedF,
+      success: true,
+    });
   } catch (error) {
-    res
+    return res
       .status(500)
-      .json({ message: "All Donation food List Failed", success: false });
+      .json({ message: "Donation food Failed", success: false });
   }
 };
-
-export { registerFood, donatedFoodList };
+export { registerFood, donatedFoodList, donatedFood };

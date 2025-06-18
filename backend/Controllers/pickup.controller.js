@@ -7,8 +7,8 @@ const schedulePickup = async (req, res) => {
     const token = req.cookies.token;
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
     const ngoId = decodedToken._id;
-    const { donationId, scheduledDate } = req.body;
-    if (!donationId || !scheduledDate) {
+    const { donationId} = req.body;
+    if (!donationId) {
       return res
         .status(400)
         .json({ message: "All fields are required", success: false });
@@ -19,12 +19,13 @@ const schedulePickup = async (req, res) => {
         .status(404)
         .json({ message: "Donation not found", success: false });
     }
-    if (donation.isPickedUp) {
+    if (donation?.isPickedUp == true) {
       return res.status(400).json({
         message: "Donation already scheduled for pickup",
         success: false,
       });
     }
+    const scheduledDate = Date.now()
     const pickup = await PickupModel.create({
       donation: donationId,
       ngo: ngoId,
