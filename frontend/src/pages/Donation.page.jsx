@@ -50,13 +50,13 @@ const DonationsPage = () => {
       console.log(result);
       if (result.success) {
         handleSuccess("Donation Registered Successfully");
-        foodName = "";
-        foodDescription = "";
-        quantity = "";
-        expiryDate = "";
-        address = "";
-        latitude = "";
-        longitude = "";
+        setFoodName("");
+        setFoodDescription("");
+        setQuantity("");
+        setExpiryDate("");
+        setAddress("");
+        setLatitude("");
+        setLongitude("");
       } else {
         handleError(result.message);
       }

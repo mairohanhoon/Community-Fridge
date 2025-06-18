@@ -1,16 +1,9 @@
 import React, { useEffect, useState } from "react";
 
-const imgLinks = [
-  "https://img.freepik.com/premium-vector/traditional-mizorami-cuisine-food-illustration_1120563-34709.jpg?semt=ais_hybrid&w=740",
-  "https://img.freepik.com/premium-vector/delicious-indian-food-illustration-white-background_1322206-34191.jpg",
-  "https://png.pngtree.com/png-vector/20230728/ourmid/pngtree-indian-food-png-image_6882307.png",
-  "https://img.freepik.com/free-vector/hand-drawn-indian-cuisine-illustrations_23-2149353847.jpg",
-];
 
 const DonatedFood = (props) => {
-  const randomLink = imgLinks[Math.floor(Math.random() * imgLinks.length)];
   const [compChanged, setCompChanged] = useState(false);
-  
+  useEffect(() => {},[], compChanged)
   const handlePickup = async (e) => {
     e.preventDefault();
     const donationId = props?.value?._id;
@@ -41,7 +34,7 @@ const DonatedFood = (props) => {
       {/* Add a fixed height to the image or its container and use object-cover */}
       <img
         className="rounded-t-lg h-48 w-full object-cover"
-        src={randomLink}
+        src=""
         alt="Food item"
       />
       <div className="p-5">
