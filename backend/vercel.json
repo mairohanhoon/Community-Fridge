@@ -11,5 +11,11 @@
       "use": "@vercel/static"
     }
   ],
-  "routes": [{ "src": "/(.*)", "dest": "/" }]
+  "routes": [{ "src": "/(.*)", "dest": "/" }],
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
+    }
+  ]
 }
