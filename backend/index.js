@@ -23,13 +23,7 @@ const allowedOrigins = [
 
 app.use(
   cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
+    origin: ["https://community-fridge-z7xx.vercel.app", "https://community-fridge-z7xx.vercel.app/login", "https://localhost:3000"],
     credentials: true,
   })
 );
