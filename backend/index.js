@@ -14,19 +14,18 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-app.use(express.json());
+
 
 const allowedOrigins = [
-  "http://localhost:5173",
-  "https://community-fridge-z7xx.vercel.app",
+  "https://community-fridge-z7xx.vercel.app",  // ✅ your frontend domain
+  "http://localhost:3000"                      // optional for local testing
 ];
 
-app.use(
-  cors({
-    origin: ["https://community-fridge-z7xx.vercel.app", "https://community-fridge-z7xx.vercel.app/login", "https://localhost:3000"],
-    credentials: true,
-  })
-);
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true
+}));
+app.use(express.json());
 app.use(cookieParser());
 app.use("/api/auth", authRouter);
 app.use("/api/donor", donorRouter);
