@@ -6,7 +6,7 @@ const MyPickupComp = (props) => {
   
   useEffect(() => {
     const getDonation = async () => {
-      const url = "http://localhost:8080/api/donor/get-donation";
+      const url = `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/donor/get-donation`;
       const response = await fetch(url, {
         method: "POST",
         body: JSON.stringify({

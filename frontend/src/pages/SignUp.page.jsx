@@ -17,7 +17,7 @@ const SignUpPage = () => {
       return handleError("All feilds are required");
     }
     try {
-      const url = "http://localhost:8080/api/auth/signup";
+      const url = `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/auth/signup`;
       const response = await fetch(url, {
         method: "POST",
         headers: {

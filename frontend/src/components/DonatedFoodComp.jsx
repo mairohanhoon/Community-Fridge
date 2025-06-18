@@ -10,7 +10,7 @@ const DonatedFood = (props) => {
   const handlePickup = async (e) => {
     e.preventDefault();
     const donationId = props?.value?._id;
-    const url = "http://localhost:8080/api/pickups/";
+    const url = `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/pickups/`;
     try {
       const response = await fetch(url, {
         method: "POST",

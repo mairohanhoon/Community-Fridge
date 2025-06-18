@@ -29,7 +29,7 @@ const DonationsPage = () => {
       return handleError("All feilds are required");
     }
     try {
-      const url = "http://localhost:8080/api/donor/register";
+      const url = `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/donor/register`;
       const response = await fetch(url, {
         method: "POST",
         headers: {

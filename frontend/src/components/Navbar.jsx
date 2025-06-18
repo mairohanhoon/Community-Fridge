@@ -19,7 +19,7 @@ const MyNavbar = () => {
     e?.preventDefault();
 
     try {
-      const url = "http://localhost:8080/api/auth/logout";
+      const url = `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/auth/logout`;
       const response = await fetch(url, {
         method: "POST",
         credentials: "include", // Send cookies

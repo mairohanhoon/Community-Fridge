@@ -9,7 +9,7 @@ const AllDonations = () => {
   useEffect(
     () => {
       const getDonations = async () => {
-        const url = "http://localhost:8080/api/pickups/allDonations";
+        const url = `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/pickups/allDonations`;
         const response = await fetch(url, {
           method: "GET",
           headers: {

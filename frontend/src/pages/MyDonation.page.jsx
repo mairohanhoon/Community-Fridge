@@ -8,7 +8,7 @@ const MyDonationPage = () => {
   const [donations, setDonations] = useState("");
   useEffect(() => {
     const getDonations = async () => {
-      const url = "http://localhost:8080/api/donor/donations";
+      const url = `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/donor/donations`;
       const response = await fetch(url, {
         method: "GET",
         headers: {

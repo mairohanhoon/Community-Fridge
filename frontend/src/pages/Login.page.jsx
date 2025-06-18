@@ -16,7 +16,7 @@ const LoginPage = () => {
       return handleError("All feilds are required");
     }
     try {
-      const url = "http://localhost:8080/api/auth/login";
+      const url = `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/auth/login`;
       const response = await fetch(url, {
         method: "POST",
         headers: {

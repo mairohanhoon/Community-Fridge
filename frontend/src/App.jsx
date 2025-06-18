@@ -10,13 +10,15 @@ import DonationsPage from "./pages/Donation.page.jsx";
 import MyDonationPage from "./pages/MyDonation.page.jsx";
 import AllDonations from "./pages/AllDonations.page.jsx";
 import MyPickupsPage from "./pages/MyPickups.page.jsx";
+
 function App() {
   const UserContext = useUserContext();
   const navigate = useNavigate();
+
   useEffect(() => {
     async function checkLoginStatus() {
       try {
-        const url = "http://localhost:8080/api/auth/userLoggedIn";
+        const url = `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/auth/userLoggedIn`;
         const response = await fetch(url, {
           method: "GET",
           credentials: "include", // if you need cookies
@@ -92,7 +94,7 @@ function App() {
           path="/donations"
           element={
             UserContext.role === "ngo" ? (
-              <AllDonations/>
+              <AllDonations />
             ) : (
               <Navigate to="/home" />
             )
@@ -102,7 +104,7 @@ function App() {
           path="/my-pickups"
           element={
             UserContext.role === "ngo" ? (
-              <MyPickupsPage/>
+              <MyPickupsPage />
             ) : (
               <Navigate to="/home" />
             )
