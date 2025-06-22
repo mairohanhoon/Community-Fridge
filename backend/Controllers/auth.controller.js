@@ -55,8 +55,9 @@ const loginController = async (req, res) => {
     );
     res.cookie("token", jwtToken, {
       httpOnly: true,
-      secure: false,
+      secure: true,
       sameSite: "Strict",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
     });
     return res.status(200).json({
       message: "Login successfully",
