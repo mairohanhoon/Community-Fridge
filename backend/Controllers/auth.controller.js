@@ -77,9 +77,10 @@ const isLoggedInController = async (req, res) => {
     const jwtT = req.cookies?.token;
     if (!jwtT) {
       return res
-        .status(402)
+        .status(401)
         .json({ message: "TOKEN NOT AVAILABLE", success: false });
     }
+
     const decoded = jwt.verify(jwtT, process.env.JWT_SECRET);
     return res.status(200).json({
       message: "Token fetched successfully",
@@ -87,6 +88,15 @@ const isLoggedInController = async (req, res) => {
       decoded,
     });
   } catch (error) {
+    if (
+      error.name === "JsonWebTokenError" ||
+      error.name === "TokenExpiredError"
+    ) {
+      return res
+        .status(401)
+        .json({ message: "Invalid or expired token", success: false });
+    }
+
     return res.status(500).json({ message: error.message, success: false });
   }
 };
