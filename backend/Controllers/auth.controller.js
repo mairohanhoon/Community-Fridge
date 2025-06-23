@@ -104,10 +104,15 @@ const isLoggedInController = async (req, res) => {
 
 const logOutController = async (req, res) => {
   try {
-    res.clearCookie("token");
-    res
+    res.clearCookie("token", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "None",
+    });
+
+    return res
       .status(200)
-      .json({ message: "Logged Out Clear Cookies", success: true });
+      .json({ message: "Logged Out, Cookie Cleared", success: true });
   } catch (error) {
     return res.status(500).json({ message: error.message, success: false });
   }
