@@ -6,6 +6,7 @@ import Donations from "./NavComponents/Donations";
 import DonateFood from "./NavComponents/DonateFood";
 import MyPickups from "./NavComponents/MyPickups";
 import MyDonations from "./NavComponents/MyDonations";
+import { ToastContainer } from "react-toastify";
 
 const MyNavbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -116,6 +117,7 @@ const MyNavbar = () => {
           </ul>
         </div>
       </div>
+      <ToastContainer/>
     </div>
   );
 };

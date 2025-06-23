@@ -39,9 +39,9 @@ const MyDonationPage = () => {
         <div className="px-40 flex flex-1 justify-center py-5">
           <div className="layout-content-container flex flex-col max-w-[960px] flex-1">
             <div className="flex flex-wrap justify-center gap-3 p-4">
-              <SparklesText className="text-white text-3xl">
+              <div className="text-white text-3xl font-extrabold">
                 My Donations
-              </SparklesText>
+              </div>
             </div>
             <div className="px-4 py-3 @container">
               <div className="flex overflow-hidden rounded-xl border border-[#4d4d4d] bg-[#1a1a1a]">
